@@ -10,15 +10,18 @@ sign_in_btn.addEventListener("click", () => {
   container.classList.remove("sign-up-mode");
 });
 
-function credentialHandler(response) {
-  console.log(response);
-  const claims = jose.decodeJwt(response.credential);
-  console.log(claims);
-  // const responsePayLoad = decodeJwtResponse(response.credential);
-  // console.log("idToken", responsePayLoad.sub);
-  // console.log("email", responsePayLoad.email);
-  // console.log("name", responsePayLoad.name);
-  // console.log("picture", responsePayLoad.picture);
-  // console.log("given_name", responsePayLoad.given_name);
-  // console.log("family_name", responsePayLoad.family_name);
+function credentialHandler(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    window
+      .atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  console.log(JSON.parse(jsonPayload));
 }
