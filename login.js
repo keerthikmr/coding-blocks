@@ -1,3 +1,5 @@
+import jwt_decode from "jwt-decode";
+
 const sign_in_btn = document.querySelector("#sign-in-btn");
 const sign_up_btn = document.querySelector("#sign-up-btn");
 const container = document.querySelector(".container");
@@ -11,17 +13,6 @@ sign_in_btn.addEventListener("click", () => {
 });
 
 function credentialHandler(token) {
-  var base64Url = token.split(".")[1];
-  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-  var jsonPayload = decodeURIComponent(
-    window
-      .atob(base64)
-      .split("")
-      .map(function (c) {
-        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-      })
-      .join("")
-  );
-
-  console.log(JSON.parse(jsonPayload));
+  var decoded = jwt_decode(token);
+  console.log(decoded);
 }
