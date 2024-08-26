@@ -11,7 +11,9 @@ sign_in_btn.addEventListener("click", () => {
 });
 
 function credentialHandler(response) {
-  console.log(response.credential);
+  console.log(response);
+  const claims = jose.decodeJwt(response.credential);
+  console.log(claims);
   // const responsePayLoad = decodeJwtResponse(response.credential);
   // console.log("idToken", responsePayLoad.sub);
   // console.log("email", responsePayLoad.email);
