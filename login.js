@@ -12,7 +12,7 @@ sign_in_btn.addEventListener("click", () => {
   container.classList.remove("sign-up-mode");
 });
 
-function credentialHandler(token) {
-  var decoded = jwt_decode(token);
+function credentialHandler(response) {
+  var decoded = jwt_decode(response);
   console.log(decoded);
 }
