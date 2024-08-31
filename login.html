@@ -8,9 +8,12 @@
 	<link rel="stylesheet" href="login.css" />
 	<title>Sign in & Sign up Form</title>
 	<script src="https://accounts.google.com/gsi/client" async></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="423329562434-dsn9edh8mpo8q5q3tfovbsmt33tgrmfc.apps.googleusercontent.com">
 </head>
 
 <body>
+	<div class="g-signin2" data-onsuccess="onSignIn"></div>
 	<div id="g_id_onload"
 		data-client_id="423329562434-dsn9edh8mpo8q5q3tfovbsmt33tgrmfc"
 		data-login_uri="https://keerthikmr.github.io/coding-blocks/login.html"
