@@ -10,9 +10,43 @@
 	<script src="https://accounts.google.com/gsi/client" async></script>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<meta name="google-signin-client_id" content="423329562434-dsn9edh8mpo8q5q3tfovbsmt33tgrmfc.apps.googleusercontent.com">
+	<script src="https://apis.google.com/js/api:client.js"></script>
 </head>
 
 <body>
+	<script>
+		// Load the API client and auth2 library
+		function onLoad() {
+		  gapi.load('auth2', function() {
+			// Initialize the client with your Client ID
+			gapi.auth2.init({
+			  client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+			});
+		  });
+		}
+	  </script>
+<button id="google-signin-button">Sign in with Google</button>
+<script>
+	document.getElementById('google-signin-button').addEventListener('click', function() {
+	  var auth2 = gapi.auth2.getAuthInstance();
+	  auth2.signIn().then(function(googleUser) {
+		// Get user profile information
+		var profile = googleUser.getBasicProfile();
+		console.log('ID: ' + profile.getId());
+		console.log('Name: ' + profile.getName());
+		console.log('Image URL: ' + profile.getImageUrl());
+		console.log('Email: ' + profile.getEmail());
+  
+		// Get the ID token
+		var id_token = googleUser.getAuthResponse().id_token;
+		console.log('ID Token: ' + id_token);
+  
+		// Send the ID token to your server for further validation
+		// (You'll need to implement this part on your server)
+	  });
+	});
+  </script>
+		
 	<script src="https://accounts.google.com/gsi/client" async defer></script>
     <div id="g_id_onload"
          data-client_id="423329562434-dsn9edh8mpo8q5q3tfovbsmt33tgrmfc.apps.googleusercontent.com"
@@ -25,7 +59,7 @@
 		data-client_id="423329562434-dsn9edh8mpo8q5q3tfovbsmt33tgrmfc"
 		data-login_uri="https://keerthikmr.github.io/coding-blocks/login.html"
 		data-auto_prompt="false"
-		data-callback="credentialHandler">
+		data-callback="onSignIn">
 	</div>
 	<div class="g_id_signin"
 		data-type="standard"
